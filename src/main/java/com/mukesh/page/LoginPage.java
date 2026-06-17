@@ -53,6 +53,7 @@ public class LoginPage extends CommonToAllPages {
     }
 
     public String getuserNameError()
+
     {
         return getTextWithWait(usernameError);
     }

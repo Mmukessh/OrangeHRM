@@ -8,32 +8,36 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
 
-    public static WebDriver driver;
+    //public static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+//    public static WebDriver getDriver() {
+//        return driver;
+//    }
 
     public static WebDriver getDriver() {
-        return driver;
+        return driver.get();
     }
 
     public static void setDriver(WebDriver driver) {
-        DriverManager.driver = driver;
+        DriverManager.driver.set(driver);
     }
 
-    public static void init()
-    {
-        String bowser= propertyReader.readKeys("browser");
+    public static void init() {
+        String bowser = propertyReader.readKeys("browser");
 
-        switch (bowser){
+        switch (bowser) {
 
             case "chrome":
-                    driver=new ChromeDriver();
-                    break;
+                driver.set(new ChromeDriver());
+                break;
 
             case "firefox":
-                driver=new FirefoxDriver();
+                driver.set(new FirefoxDriver());
                 break;
 
             case "edge":
-                driver=new EdgeDriver();
+                driver.set(new EdgeDriver());
                 break;
 
             default:
@@ -43,11 +47,13 @@ public class DriverManager {
 
     }
 
-    public static void tearDown()
-    {
-        if(driver!=null)
+    public static void tearDown() {
         {
-            driver.quit();
+            if (driver.get() != null) {
+                driver.get().quit();
+                driver.remove();
+
+            }
         }
     }
 }

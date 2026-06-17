@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.mukesh.driver.DriverManager.driver;
+import static com.mukesh.driver.DriverManager.getDriver;
 
 public class waitHelper {
 
@@ -30,7 +30,7 @@ public class waitHelper {
     public static String getTextWithWait(By locator)
     {
         WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(),Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getText();
     }
 
     public static void checkvisibilityTclick(By locator)
@@ -40,7 +40,7 @@ public class waitHelper {
         button.click();
     }
 
-    private static WebDriverWait getWait(DriverManager driverManager) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10));
+    public static WebDriverWait getWait() {
+        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
     }
 }
