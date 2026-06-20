@@ -93,4 +93,15 @@ public class Dropdown {
         employeename.sendKeys(Keys.ARROW_DOWN);
         employeename.sendKeys(Keys.ENTER);
     }
+
+    public static void manageJobTitle(By locator)
+    {
+        WebElement dropdowntrigger = getWait().until(ExpectedConditions.elementToBeClickable(locator));
+        dropdowntrigger.click();
+        String xpath = "//a[text()='Manage Job Titles']";
+
+        WebElement option = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        option.click();
+
+    }
 }

@@ -26,6 +26,7 @@ public class TC_007_AddUser extends BaseTest {
     {
         Faker faker=new Faker();
         String username= faker.name().username();
+
         LoginPage loginPage=new LoginPage(DriverManager.getDriver());
         DashboardPage dashboardPage=new DashboardPage(DriverManager.getDriver());
         AddUser  addUser=new AddUser(DriverManager.getDriver());
@@ -38,6 +39,8 @@ public class TC_007_AddUser extends BaseTest {
         addUser.adduser(employeeName,username,"Global Admin","Welcome@1Atthang","Welcome@1Atthang");
        String userstatus= String.valueOf(dashboardPage.userstatus(username));
         System.out.println(userstatus);
+
+        iTestContext.setAttribute("USERNAME",username);
         Assert.assertEquals(userstatus,"Enabled");
         waitJVM(5000);
     }

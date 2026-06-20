@@ -7,8 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-import static com.mukesh.driver.DriverManager.getDriver;
+import java.util.List;
 
 public class waitHelper {
 
@@ -42,5 +41,17 @@ public class waitHelper {
 
     public static WebDriverWait getWait() {
         return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+    }
+
+    public static void refresgpage()
+    {
+        DriverManager.getDriver().navigate().refresh();
+    }
+
+    public static List<WebElement> waitfoeElement(By locator)
+    {
+        WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(),Duration.ofSeconds(20));
+
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 }
