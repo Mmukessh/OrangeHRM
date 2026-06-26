@@ -39,8 +39,11 @@ public class DashboardPage extends CommonToAllPages {
     private By filterUsername=By.xpath("//input[@id='systemuser_uname_filter']");
     private By filtersearchButton=By.xpath("//a[contains(text(), 'Search')]");
     private By jobdropdown=By.xpath("//a[@data-automation-id='menu_admin_Job']");
-
-
+    private By manageJobTitle=By.xpath("//div[@id='top_level_menu_item_menu_item_102']//a[@data-automation-id='menu_admin_viewJobTitleList']");
+    private By manageGrade=By.xpath("//div[@id='top_level_menu_item_menu_item_102']//a[@data-automation-id='menu_admin_viewPayGrades']");
+    private By employmentStatus=By.xpath("//div[@id='top_level_menu_item_menu_item_102']//a[@data-automation-id='menu_admin_employmentStatus']");
+    private By organizationdropdown=By.xpath("//a[@data-automation-id='menu_admin_Organization']");
+    private By addorganization=By.xpath("//div[@id='top_level_menu_item_menu_item_108']//a[@data-automation-id='menu_admin_viewLocations']");
 
     //
 
@@ -332,10 +335,32 @@ public class DashboardPage extends CommonToAllPages {
        return username_table;
     }
 
-    public void jobtitle()
+    public void clickjobtitle()
     {
         clickHRAdministration();
-        manageJobTitle(jobdropdown);
+        manageJobTitle(jobdropdown,manageJobTitle);
+        waitJVM(3000);
+
+    }
+
+    public void clickManageGrade()
+    {
+        clickHRAdministration();
+        manageJobTitle(jobdropdown,manageGrade);
+        waitJVM(3000);
+
+    }
+    public void clickemploymentStatus()
+    {
+        clickHRAdministration();
+        manageJobTitle(jobdropdown,employmentStatus);
+        waitJVM(3000);
+
+    }
+
+    public void clickorganizationLocation()
+    {
+        manageJobTitle(organizationdropdown,addorganization);
         waitJVM(3000);
     }
 

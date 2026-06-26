@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.mukesh.utility.waitHelper.getWait;
-import static com.mukesh.utility.waitHelper.waitJVM;
+import static com.mukesh.utility.waitHelper.*;
 
 public class Dropdown {
 
@@ -53,6 +52,7 @@ public class Dropdown {
         WebElement dropdowntrigger=getWait().until(ExpectedConditions.elementToBeClickable(locator));
         dropdowntrigger.click();
         String xpathnationality="//select[@id='nation_code']/preceding-sibling::ul//span[text()='"+value+"']";
+
         WebElement option=getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpathnationality)));
         ((JavascriptExecutor) DriverManager.getDriver())
                 .executeScript("arguments[0].scrollIntoView({block:'center'});", option);
@@ -94,14 +94,28 @@ public class Dropdown {
         employeename.sendKeys(Keys.ENTER);
     }
 
-    public static void manageJobTitle(By locator)
+    public static void manageJobTitle(By locator,By xpath)
     {
         WebElement dropdowntrigger = getWait().until(ExpectedConditions.elementToBeClickable(locator));
         dropdowntrigger.click();
-        String xpath = "//a[text()='Manage Job Titles']";
+        //String xpath = "//div[@id='top_level_menu_item_menu_item_102']//a[@data-automation-id='menu_admin_viewJobTitleList']";
 
-        WebElement option = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        WebElement option = getWait().until(ExpectedConditions.elementToBeClickable(xpath));
         option.click();
+
+    }
+
+    public static void selectNationality(By locator,String value)
+    {
+        checkvisibilityTclick(locator);
+        String xpath="//select[@id='countryCode']/preceding-sibling::ul//span[text()='" + value + "']";
+
+        WebElement optionSelect=getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", optionSelect);
+
+        getWait().until(ExpectedConditions.elementToBeClickable(optionSelect));
+        optionSelect.click();
 
     }
 }

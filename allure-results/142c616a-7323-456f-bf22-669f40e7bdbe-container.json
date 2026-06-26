@@ -1,0 +1,1 @@
+{"uuid":"142c616a-7323-456f-bf22-669f40e7bdbe","name":"com.mukesh.base.BaseTest.setup","children":["87d68804-2f44-49e1-8823-9b830b907ff9"],"description":"","befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1781696406764,"stop":1781696411275}],"afters":[],"start":1781696406764,"stop":1781696411275}

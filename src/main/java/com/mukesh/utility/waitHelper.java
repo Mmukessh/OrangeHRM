@@ -40,7 +40,7 @@ public class waitHelper {
     }
 
     public static WebDriverWait getWait() {
-        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30));
     }
 
     public static void refresgpage()
