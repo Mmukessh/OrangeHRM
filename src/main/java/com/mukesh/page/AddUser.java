@@ -28,6 +28,7 @@ public class AddUser extends CommonToAllPages {
     private By savebutton=By.xpath("//button[@id='modal-save-button']");
 
 
+
     public void adduser(String employeename,String username,String adminrole,String passwoed,String confirmpassword)
     {
 

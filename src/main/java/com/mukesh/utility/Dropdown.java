@@ -118,4 +118,18 @@ public class Dropdown {
         optionSelect.click();
 
     }
+
+    public static void selecttimeZone(By locator,String value)
+    {
+        checkvisibilityTclick(locator);
+        String xpath="//select[@id='time_zone']/preceding-sibling::ul//span[text()='" + value + "']";
+
+        WebElement optionSelect=getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", optionSelect);
+
+        getWait().until(ExpectedConditions.elementToBeClickable(optionSelect));
+        optionSelect.click();
+    //(GMT-12:00) GMT-12:00
+    }
 }

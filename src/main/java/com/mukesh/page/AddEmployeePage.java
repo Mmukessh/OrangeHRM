@@ -46,7 +46,7 @@ public class AddEmployeePage extends CommonToAllPages {
     private By toastMessage = By.xpath("//div[@id='toast-container']//div[contains(@class,'toast-message')]");
     private By status=By.xpath("//span[@class='section-data-status-active' and text()='Active']");
     private By fullname=By.xpath("//span[@class='section-data' and ../text()[contains(., 'Full Name:')]]");
-
+    private By EditSaveButton=By.xpath("//button[@type='submit']");
 
 
     public void addEmployee(String firstname,String middlename,String lastname,String year,String month,String date,String location,String otherid,String ssn,String dobyear,String dobmonth,String dobdate,String maritalstatus,String gender,String country,String licenseno,String expyear,String expmonth,String expdate,String onboarding)
@@ -91,6 +91,12 @@ public class AddEmployeePage extends CommonToAllPages {
     public String getfullname()
     {
         return getTextWithWait(fullname);
+    }
+
+    public void editEmployeeDetails(String maritalstatus)
+    {
+        maritalstatus(maritalstatusDropdown,maritalstatus);
+        click(EditSaveButton);
     }
 
 }

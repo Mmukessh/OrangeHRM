@@ -2,21 +2,14 @@ package com.mukesh.page;
 
 import com.mukesh.base.CommonToAllPages;
 import com.mukesh.driver.DriverManager;
-import org.apache.logging.log4j.core.appender.rolling.SizeBasedTriggeringPolicy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.StaleElementReferenceException;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mukesh.utility.Dropdown.adminRole;
 import static com.mukesh.utility.Dropdown.manageJobTitle;
 import static com.mukesh.utility.waitHelper.*;
 
@@ -44,8 +37,10 @@ public class DashboardPage extends CommonToAllPages {
     private By employmentStatus=By.xpath("//div[@id='top_level_menu_item_menu_item_102']//a[@data-automation-id='menu_admin_employmentStatus']");
     private By organizationdropdown=By.xpath("//a[@data-automation-id='menu_admin_Organization']");
     private By addorganization=By.xpath("//div[@id='top_level_menu_item_menu_item_108']//a[@data-automation-id='menu_admin_viewLocations']");
-
-    //
+    private By searchEmployee=By.xpath("//input[@placeholder='Employee Name']");
+    private By clickEmployeeList= By.xpath("//div[@unique-name='uniqueName']//a[text()='Employee List ']");
+    private By pesonalDetails=By.xpath("//a[@data-automation-id='menu_employee_profile_PersonalDetails']");
+    private By changeProfilePic=By.xpath("//button[@tooltip='Change Profile Picture']");
 
     public void clickonLogout()
     {
@@ -364,4 +359,74 @@ public class DashboardPage extends CommonToAllPages {
         waitJVM(3000);
     }
 
+    public boolean searchEmployeeBy_Name(String EmployeeName)
+    {
+        waitJVM(4000);
+        click(clickEmployeeList);
+        waitJVM(10000);
+
+        enterText(searchEmployee,EmployeeName);
+        driver.findElement(searchEmployee).sendKeys(Keys.ENTER);
+        waitJVM(10000);
+
+
+        List<String> users=new ArrayList<>();
+        List<WebElement> userlist=DriverManager.getDriver().findElements(tablerow);
+        String ExpectedName=EmployeeName.trim();
+
+        for(WebElement row:userlist)
+        {
+            String user=row.findElement(By.xpath("./td[2]")).getText().trim();
+            users.add(user);
+
+            if(ExpectedName.contains(user) || user.contains(EmployeeName))
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
+    public boolean editEmployeeDetails(String EmployeeName)
+    {
+        waitJVM(4000);
+        click(clickEmployeeList);
+        waitJVM(10000);
+
+        enterText(searchEmployee,EmployeeName);
+        driver.findElement(searchEmployee).sendKeys(Keys.ENTER);
+        waitJVM(10000);
+
+
+        List<String> users=new ArrayList<>();
+        List<WebElement> userlist=DriverManager.getDriver().findElements(tablerow);
+        String ExpectedName=EmployeeName.trim();
+
+        for(WebElement row:userlist)
+        {
+            String user=row.findElement(By.xpath("./td[2]")).getText().trim();
+            users.add(user);
+
+            if(ExpectedName.contains(user) || user.contains(EmployeeName))
+            {
+                WebElement cell=row.findElement(By.xpath("//tr//a[contains(@class, 'table-cell-link')][normalize-space()='" + EmployeeName + "']"));
+                JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+                js.executeScript("arguments[0].click();", cell);
+
+                waitJVM(25000);
+                click(changeProfilePic);
+                click(pesonalDetails);
+                waitJVM(25000);
+
+
+                return true;
+            }
+
+        }
+
+
+        return false;
+    }
 }

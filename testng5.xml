@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/MUKESH/IdeaProjects/OrangeHRM">
+        <classes>
+
+            <class name="com.mukesh.test.TC_006_EmployeeAdd">
+                <methods>
+                    <include name="addEmployee"/>
+                </methods>
+            </class>
+            <class name="com.mukesh.test.TC_016_SearchEmployee_ByName">
+                <methods>
+                    <include name="TC_16_SearchEmployeeByName"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+</suite>
