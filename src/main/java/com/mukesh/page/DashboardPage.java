@@ -389,7 +389,7 @@ public class DashboardPage extends CommonToAllPages {
         return false;
     }
 
-    public boolean editEmployeeDetails(String EmployeeName)
+    public boolean clickEmployeeDetails(String EmployeeName)
     {
         waitJVM(4000);
         click(clickEmployeeList);
@@ -416,7 +416,6 @@ public class DashboardPage extends CommonToAllPages {
                 js.executeScript("arguments[0].click();", cell);
 
                 waitJVM(25000);
-                click(changeProfilePic);
                 click(pesonalDetails);
                 waitJVM(25000);
 
@@ -426,7 +425,8 @@ public class DashboardPage extends CommonToAllPages {
 
         }
 
-
         return false;
     }
+
+
 }

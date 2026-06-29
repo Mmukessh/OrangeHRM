@@ -132,4 +132,24 @@ public class Dropdown {
         optionSelect.click();
     //(GMT-12:00) GMT-12:00
     }
+
+    public static void clickonDependants(By locator,By xpath)
+    {
+        WebElement dropdowntrigger = getWait().until(ExpectedConditions.elementToBeClickable(locator));
+        dropdowntrigger.click();
+        getWait().until(ExpectedConditions.visibilityOfElementLocated(xpath));
+
+        getWait().until(ExpectedConditions.elementToBeClickable(xpath)).click();
+
+    }
+
+    public static void selectrelationship(By locator,String relationshipValue)
+    {
+        WebElement dropdowntrigger = getWait().until(ExpectedConditions.elementToBeClickable(locator));
+        dropdowntrigger.click();
+        String xpath = "//li[contains(@class, 'custom-dropdown-item')]//span[normalize-space()='" + relationshipValue + "']";
+
+        WebElement option = getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        option.click();
+    }
 }

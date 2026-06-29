@@ -10,22 +10,20 @@ import io.qameta.allure.Description;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
-public class TC_017_EditEmployeeDetais extends BaseTest {
+public class TC_018_AddDependant extends BaseTest {
 
-    @Description("Edit Employee personal details")
+    @Description("Add Dependant")
     @Test
 
-    public void TC_017_editEmployeeDetais(ITestContext itestContext){
-
+    public void TC_018_AddDependant(ITestContext itestContext)
+    {
         String employeeName=itestContext.getAttribute("FullName").toString();
         LoginPage loginPage=new LoginPage(DriverManager.getDriver());
         DashboardPage dashboardPage=new DashboardPage(DriverManager.getDriver());
-        AddEmployeePage  addEmployeePage=new AddEmployeePage(DriverManager.getDriver());
+        AddEmployeePage addEmployeePage=new AddEmployeePage(DriverManager.getDriver());
 
         loginPage.Login(propertyReader.readKeys("username"),propertyReader.readKeys("password"));
         dashboardPage.clickEmployeeDetails(employeeName);
-        addEmployeePage.editEmployeeDetails("Married");
-
-
+        addEmployeePage.addDependent("Atthang","2022","December","22","Child");
     }
 }

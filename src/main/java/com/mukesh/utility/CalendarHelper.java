@@ -143,6 +143,39 @@ public class CalendarHelper {
         getWait().until(ExpectedConditions.elementToBeClickable(expirydateLocator)).click();
 
     }
+
+    public static void dependantDOB(By dobCalenderButton,By dobyearButton,By monthbuttontrigger,String dobYear,String dobMonth,String dobDate ){
+
+        DriverManager.getDriver().findElement(dobCalenderButton).click();
+        waitJVM(500);
+
+        WebElement yearElement=getWait().until(ExpectedConditions.elementToBeClickable(dobyearButton));
+        String currentyear=yearElement.getAttribute("title");
+
+        if(!currentyear.equals(dobYear))
+        {
+            yearElement.click();
+            WebElement yearOption=getWait().until(ExpectedConditions.elementToBeClickable(DriverManager.getDriver().findElement(By.xpath("//ul[contains(@class, 'dropdown-menu')]//li//span[normalize-space()='" + dobYear + "']"))));
+            yearOption.click();
+        }
+        waitJVM(500);
+
+        WebElement monthElement=getWait().until(ExpectedConditions.elementToBeClickable(monthbuttontrigger));
+        String currentmonth=monthElement.getAttribute("title");
+
+        if(!currentmonth.equals(dobMonth))
+        {
+            monthElement.click();
+            WebElement monthOption=getWait().until(ExpectedConditions.elementToBeClickable(DriverManager.getDriver().findElement(By.xpath("//div[contains(@class, 'picker__select--month')]//ul[contains(@class, 'dropdown-menu')]//li//span[normalize-space()='" + dobMonth + "']"))));
+            monthOption.click();
+        }
+        waitJVM(500);
+
+        WebElement dobdateButton = getWait().until(ExpectedConditions.elementToBeClickable(DriverManager.getDriver().findElement(By.xpath("//table[contains(@class, 'picker__table')]//div[contains(@class, 'picker__day--infocus')][normalize-space()='" + dobDate + "']"))));
+        dobdateButton.click();
+
+
+    }
 }
 
 

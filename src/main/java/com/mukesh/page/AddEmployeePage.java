@@ -47,8 +47,15 @@ public class AddEmployeePage extends CommonToAllPages {
     private By status=By.xpath("//span[@class='section-data-status-active' and text()='Active']");
     private By fullname=By.xpath("//span[@class='section-data' and ../text()[contains(., 'Full Name:')]]");
     private By EditSaveButton=By.xpath("//button[@type='submit']");
-
-
+    private By moreOption=By.xpath("//a[@data-automation-id='menu_top_more']");
+    private By dependants=By.xpath("//div[contains(@class,'sub-menu-item')]//a[@data-automation-id='menu_employee_profile_Dependents']");
+    private By addDependant=By.xpath("//div[@data-tooltip='Add Dependent']");
+    private By dependantName=By.xpath("//input[@id='name']");
+    private By dependantDOBcal_trigger=By.xpath("//button[i[contains(@class, 'date-picker-open-icon')]]");
+    private By dependantDOBMonth_trigger=By.xpath("//div[contains(@class, 'picker__select--month')]//button");
+    private By dependantDOBYear_trigger=By.xpath("//div[contains(@class, 'picker__select--year')]//button");
+    private By relationshipdropdown=By.xpath("//label[contains(text(), 'Relationship')]/following-sibling::div//button");
+    private By savebutton=By.xpath("//button[@id='modal-save-button']");
     public void addEmployee(String firstname,String middlename,String lastname,String year,String month,String date,String location,String otherid,String ssn,String dobyear,String dobmonth,String dobdate,String maritalstatus,String gender,String country,String licenseno,String expyear,String expmonth,String expdate,String onboarding)
     {
         enterText(fiestName,firstname);
@@ -97,6 +104,18 @@ public class AddEmployeePage extends CommonToAllPages {
     {
         maritalstatus(maritalstatusDropdown,maritalstatus);
         click(EditSaveButton);
+    }
+
+    public void addDependent(String name,String year,String month,String date,String relation)
+    {
+        clickonDependants(moreOption,dependants);
+        waitJVM(5000);
+        click(addDependant);
+        waitJVM(500);
+        enterText(dependantName,name);
+        dependantDOB(dependantDOBcal_trigger,dependantDOBYear_trigger,dependantDOBMonth_trigger,year,month,date);
+        selectrelationship(relationshipdropdown,relation);
+        click(savebutton);
     }
 
 }
