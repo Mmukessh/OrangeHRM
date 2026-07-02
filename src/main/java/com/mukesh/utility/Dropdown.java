@@ -133,7 +133,7 @@ public class Dropdown {
     //(GMT-12:00) GMT-12:00
     }
 
-    public static void clickonDependants(By locator,By xpath)
+    public static void clickonMoreOptions(By locator,By xpath)
     {
         WebElement dropdowntrigger = getWait().until(ExpectedConditions.elementToBeClickable(locator));
         dropdowntrigger.click();
